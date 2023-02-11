@@ -1,0 +1,105 @@
+TW :- 5  
+
+Design, develop, code and run the program in any suitable language to 
+solve the commission problem. Analyze it from the perspective of decision 
+table-based testing, derive different test cases, execute these test cases and 
+discuss the test results. 
+
+ALGORITHM 
+
+Step 1: Input 3 integer numbers which represents number of Locks, Stocks 
+and Barrels sold. 
+Step 2: compute the total sales =(Number of Locks sold *45) + (Number of 
+Stocks sold *30) + (Number of Barrels sold *25) 
+Step 3: if a totals sale in dollars is less than or equal to $1000 
+then commission = 0.10* total Sales do step 6 
+Step 4: else if total sale is less than $1800 
+then commission1 = 0.10* 1000 
+commission = commission1 + (0.15 * (total sales – 1000)) 
+do step 6 
+Step 5: else commission1 = 0.10* 1000 
+commission2 = commission1 + (0.15 * 800)) 
+commission = commission2 + (0.20 * (total sales – 1800)) do 
+step 6 
+Step 6: Print commission. 
+Step 7: Stop.
+
+
+#include<stdio.h> 
+#include<conio.h> 
+int main() 
+{ 
+int locks, stocks, barrels, t_sales, flag = 0; 
+float commission; 
+clrscr(); 
+printf("Enter the total number of locks"); 
+scanf("%d",&locks); 
+if ((locks <= 0) || (locks > 70)) 
+{ 
+flag = 1; 
+} 
+printf("Enter the total number of stocks"); 
+scanf("%d",&stocks); 
+if ((stocks <= 0) || (stocks > 80)) 
+{ 
+flag = 1; 
+} 
+printf("Enter the total number of barrelss"); 
+scanf("%d",&barrels); 
+if ((barrels <= 0) || (barrels > 90)) 
+{ 
+flag = 1; 
+} 
+if (flag == 1) 
+{ 
+printf("invalid input"); 
+getch(); 
+exit(0); 
+} 
+t_sales = (locks * 45) + (stocks * 30) + (barrels * 25); 
+if (t_sales <= 1000) 
+{ 
+commission = 0.10 * t_sales; 
+}
+
+else if (t_sales < 1800) 
+{ 
+commission = 0.10 * 1000; 
+commission = commission + (0.15 * (t_sales - 1000)); 
+} 
+else 
+{ 
+commission = 0.10 * 1000; 
+commission = commission + (0.15 * 800); 
+commission = commission + (0.20 * (t_sales - 1800)); 
+} 
+printf("The total sales is %d \n The commission is %f",t_sales, commission); 
+getch(); 
+return; 
+}
+Test cases 1:
+Enter the total number of locks 75
+75
+Enter the total number of stocks 15
+15
+Enter the total number of barrelss 45
+45
+invalid input
+
+Test cases 2:
+Enter the total number of locks 45
+45
+Enter the total number of stocks 35
+35
+Enter the total number of barrelss 55
+55
+The total sales is 4450 
+ The commission is 750.000000
+
+Test cases 3:
+Enter the total number of locks -5
+-5
+Enter the total number of stocks 40
+40
+Enter the total number of barrelss91 invalid input
+

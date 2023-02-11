@@ -1,0 +1,97 @@
+TW: 9 
+
+ Design, develop, code and run the program in any suitable language to implement the Next Date function. Analyze it from the perspective of equivalence class value testing, derive different test cases, execute these test cases and discuss the test results. 
+
+ALGORITHM 
+
+STEP 1: Input date in format DD.MM.YYYY 
+STEP2: if MM is 01, 03, 05,07,08,10 do STEP3 else STEP6 
+STEP3:if DD < 31 then do STEP4 else if DD=31 do STEP5 else 
+output(Invalid Date); 
+STEP4: tomorrowday=DD+1 goto STEP18 
+STEP5: tomorrowday=1; tomorrowmonth=month + 1 goto STEP18 
+STEP6: if MM is 04, 06, 09, 11 do STEP7 
+STEP7: if DD<30 then do STEP4 else if DD=30 do STEP5 else 
+output(Invalid Date); 
+STEP8: if MM is 12 
+STEP9: if DD<31 then STEP4 else STEP10 
+STEP10: tomorrowday=1, tommorowmonth=1, tommorowyear=YYYY+1; 
+goto STEP18 
+STEP11: if MM is 2 
+STEP12: if DD<28 do STEP4 else do STEP13 
+STEP13: if DD=28 & YYYY is a leap do STEP14 else STEP15 
+STEP14: tommorowday=29 goto STEP18 
+STEP15: tommorowday=1, tomorrowmonth=3, goto STEP18;
+
+
+STEP16: if DD=29 then do STEP15 else STEP17 
+STEP17: output(“Cannot have feb”, DD); STEP19 
+STEP18: output(tomorrowday, tomorrowmonth, tomorrowyear); 
+STEP19: exit
+#include<stdio.h> 
+#include<conio.h> 
+main( ) 
+{ 
+int month[12]={31,28,31,30,31,30,31,31,30,31,30,31}; 
+int d,m,y,nd,nm,ny,ndays; 
+clrscr( ); 
+printf("enter the date,month,year"); 
+scanf("%d%d%d",&d,&m,&y); 
+ndays=month[m-1]; 
+if(y<=1812 && y>2012) 
+{ 
+printf("Invalid Input Year"); 
+exit(0); 
+} 
+if(d<=0 || d>ndays) 
+{ 
+printf("Invalid Input Day"); 
+exit(0); 
+} 
+if(m<1 && m>12) 
+{ 
+printf("Invalid Input Month"); 
+exit(0); 
+} 
+if(m==2) 
+{ 
+if(y%100==0) 
+{ 
+if(y%400==0) 
+ndays=29; 
+} 
+else if(y%4==0) 
+ndays=29; 
+} 
+nd=d+1; 
+nm=m;
+ny=y; 
+if(nd>ndays) 
+{ 
+nd=1; 
+nm++; 
+} 
+if(nm>12) 
+{ 
+nm=1; 
+ny++; 
+} 
+printf("\n Given date is %d:%d:%d",d,m,y); 
+printf("\n Next day’s date is %d:%d:%d",nd,nm,ny); 
+getch( ); 
+}
+
+
+Test case 1:
+Enter the today’s date in the form of dd/mm/yyyy
+28/02/1992
+Next day is : 29/02/1992
+
+
+Test case 2:
+Enter the today’s date in the form of dd/mm/yyyy
+31/04/2013
+Value of day , not in the range day <=30
+
+
+
