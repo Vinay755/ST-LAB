@@ -1,55 +1,54 @@
 TW:- 2.  Design and develop a program in a language of your choice to solve the triangle problem defined as follows: Accept three integers which are supposed to be the three sides of a triangle and determine if the three values represent an equilateral triangle, isosceles triangle, scalene triangle, or they do not form a triangle at all. Assume that the upper limit for the size of any side is 10. Derive test cases for your program based on boundary-value analysis, execute the test cases and discuss the results. 
 
-ALGORITHM: 
-Step 1: Input a, b & c i.e three integer values which represent three sides of 
-the triangle. 
-Step 2: if (a < (b + c)) and (b < (a + c)) and (c < (a + b) then 
-do step 3 
-else 
-print not a triangle. do step 6. 
-Step 3: if (a=b) and (b=c) then 
-Print triangle formed is equilateral. do step 6. 
-Step 4: if (a ≠ b) and (a ≠ c) and (b ≠ c) then 
-Print triangle formed is scalene. do step 6. 
-Step 5: Print triangle formed is Isosceles. 
-Step 6: stop
+#include <stdio.h>
+int main()
+{
+  int a,b,c,c1,c2,c3,b1,b2,b3;
+  do
+{
+printf("\n\n\nEnter 3 integers which are sides of triangle (Range 1-10)\n");
+ scanf("%d%d%d",&a,&b,&c);
+ printf("\na=%d\tb=%d\tc=%d",a,b,c);
+ c1 = a<=10;
+ c2= b<=10;
+ c3= c<=10;
 
-#include<stdio.h> 
-#include<ctype.h> 
-#include<conio.h> 
-#include<process.h> 
-int main() 
-{ 
-int a, b, c; 
-clrscr(); 
-printf("Enter three sides of the triangle"); 
-scanf("%d%d%d", &a, &b, &c); 
- 
-if((a > 10) || (b > 10) || (c > 10)) 
-{ 
-printf("Out of range"); 
-getch(); 
-exit(0); 
-} 
-if((a<b+c)&&(b<a+c)&&(c<a+b)) 
-{ 
-if((a==b)&&(b==c)) 
-{ 
-printf("Equilateral triangle"); 
-} 
-else if((a!=b)&&(a!=c)&&(b!=c)) 
-{ 
-printf("Scalene triangle"); 
-} 
-else 
-printf("Isosceles triangle"); 
-} 
-else 
-{ 
-printf("triangle cannot be formed"); 
-} 
-getch(); 
-return 0; 
+ b1 = a<1;
+ b2 = b<1;
+ b3 = c<1;
+
+if
+    (b1)
+ printf("\nThe value of a=%d is below the range",a);
+ if (b2)
+ printf("\nThe value of b=%d is below the range",b);
+ if (b3)
+ printf("\nThe value of c=%d is below the range",c);
+
+ if (!c1)
+ printf("\nThe value of a=%d is above the range",a);
+ if (!c2)
+ printf("\nThe value of b=%d is above the range",b);
+ if (!c3)
+ printf("\nThe value of c=%d is above the range",c);
+
+
+} while(!(c1 && c2 && c3) && !(b1 && b2 && b3));
+
+    if(((a+b)>c)&&((b+c)>a)&&((c+a)>b))
+    {
+
+      if((a==b)&&(b==c))
+          printf("\nIt is an Equilateral Triangle");
+    else if((a==b)||(b==c)||(c==a))
+        printf("\nIt is an isosceles Triangle");
+          else
+              printf("\nIt is a Scalene Triangle");
+
+    }
+    else
+    printf("\nNot a triangle");
+  return 0;
 }
 
 TEST CASE 1:
