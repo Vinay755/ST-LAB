@@ -23,37 +23,33 @@ Print triangle formed is scalene. do step 6.
 Step 5: Print triangle formed is Isosceles.
 Step 6: stop
 
-
 #include<stdio.h>
-#include<ctype.h>
-#include<conio.h>
-#include<process.h>
 int main()
 {
-int a, b, c;
-clrscr();
-printf("Enter three sides of the triangle");
-scanf("%d%d%d", &a, &b, &c);
-if((a<b+c)&&(b<a+c)&&(c<a+b))
-{
-if((a==b)&&(b==c))
-{
-printf("Equilateral triangle");
-}
-else if((a!=b)&&(a!=c)&&(b!=c))
-{
-printf("Scalene triangle");
-}
+int a,b,c;
+char istriangle;
+printf("Enter 3 integers which are sides of triangle\n");
+scanf("%d%d%d",&a,&b,&c);
+printf("a=%d\tb=%d\tc=%d",a,b,c);
+// to check is it a triangle or not
+if( a<b+c && b<a+c && c<a+b )
+istriangle='y';
 else
-printf("Isosceles triangle");
-}
+istriangle ='n';
+// to check which type of triangle
+if (istriangle=='y')
+if ((a==b) && (b==c))
+printf("\nIt is an Equilateral triangle\n");
+else if ((a!=b) && (a!=c) && (b!=c))
+printf("\nIt is a Scalene triangle\n");
+ else
+printf("\nIt is an Isosceles triangle\n");
 else
-{
-printf("triangle cannot be formed");
-}
-getch();
+printf("\nNot a triangle\n");
 return 0;
 }
+
+
 
 
 TEST CASE 1 :
