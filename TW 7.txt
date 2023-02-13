@@ -5,54 +5,52 @@ Design, develop, code and run the program in any suitable language to implement 
 
 PROGRAM CODE: 
 
-#include <stdio.h> 
-void swap ( int* a, int* b ) 
-{ 
-int t = *a; 
-*a = *b; 
-*b = t; 
-} 
-int partition (int arr[], int l, int h) 
-{ 
-int x = arr[h]; 
-int i = (l - 1),j; 
-for (j = l; j <= h- 1; j++) 
-{ 
-if (arr[j] <= x) 
-{ 
-i++; 
-swap (&arr[i], &arr[j]); 
-} 
-} 
-swap (&arr[i + 1], &arr[h]); 
-return (i + 1); 
-} 
-void quickSortIterative (int arr[], int l, int h) 
-{ 
-int stack[10],p; 
-int top = -1; 
-stack[ ++top ] = l; 
-stack[ ++top ] = h; 
-while ( top >= 0 ) 
-{ 
-h = stack[ top-- ];
+#include<stdio.h>
+void quick_sort(int a[100],int low,int high)
+{
+    int i,j,temp,key;
+    if(low<high)
+    {
+        key=a[low];
+        i=low;
+        j=high;
+//Partition the array into two parts
+    while(i<=j)
+    {
+        while(key>=a[i])
+        i++;
+        while(key<a[j])
+        j--;
+        if(i<j)
+        {
+            temp=a[i];
+            a[i]=a[j];
+            a[j]=temp;
+        }
+    }
+//partition completed
+    temp=a[low];
+    a[low]=a[j];
+    a[j]=temp;
+//Consider j as mid and cal recursive function.
+    quick_sort(a,low,j-1);
+    quick_sort(a,j+1,high);
+    }
+}
+//Main Function
+void main()
+{
+    int i,n,a[100];
+    printf("Enter the value for n\n");
+    scanf("%d",&n);
 
-
- int main () 
-{ 
-int arr[20],n,i; 
-clrscr(); 
-printf("Enter the size of the array"); 
-scanf("%d",&n); 
-printf("Enter %d elements",n); 
-for(i=0;i<n;i++) 
-scanf("%d",&arr[i]); 
-quickSortIterative( arr, 0, n - 1 ); 
-printf("Elements of the array are;"); 
-for(i=0;i<n;i++) 
-printf("%d",arr[i]); 
-getch(); 
-return 0; 
+    printf("Enter %d Elements\t",n);
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    quick_sort(a,0,n-1);
+    printf("The Sorted array is\t");
+    for(i=0;i<n;i++)
+    printf("%d\t",a[i]);
 }
 
 Enter the size of the array : 9
