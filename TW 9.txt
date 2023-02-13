@@ -2,83 +2,115 @@ TW: 9
 
  Design, develop, code and run the program in any suitable language to implement the Next Date function. Analyze it from the perspective of equivalence class value testing, derive different test cases, execute these test cases and discuss the test results. 
 
-ALGORITHM 
+#include<stdio.h>
+int check(int day,int month)
+{
+    if((month==4||month==6||month==9 ||month==11) && day==31)
+    return 1;
+    else return 0;
+}
+int isleap(int year)
+{
+    if((year%4==0 && year%100!=0) || year%400==0)
+    return 1;
+    else return 0;
+}
+int main()
+{
+    int day,month,year,tomm_day,tomm_month,tomm_year;
+    char flag;
+    do
+    {
+        flag='y';
+        printf("\nEnter the today's date in the form of dd/mm/yyyy\n");
+        scanf("%d/%d/%d",&day,&month,&year);
+        tomm_month=month;
+        tomm_year= year;
+        if(day<1 || day>31)
+        {
+            printf("value of day, not in the range 1...31\n");
+            flag='n';
+        }
+        if(month<1 || month>12)
+        {
+            printf("value of month, not in the range 1....12\n");
+            flag='n';
+        }
+        else if(check(day,month))
+        {
+            printf("value of day, not in the range day<=30");
+            flag='n';
+        }
+        if(year<=1812 || year>2021)
+        {
+            printf("value of year, not in the range 1812.......2021\n");
+            flag='n';
+        }
+        if(month==2)
+        {
+            if(isleap(year) && day>29)
+            {
+                printf("invalid date input for leap year");
+                flag='n';
+            }
+        else if(!(isleap(year))&& day>28)
+        {
+            printf("invalid date input for not a leap year");
+            flag='n';
+        }
+        }
+    }while(flag=='n');
 
-STEP 1: Input date in format DD.MM.YYYY 
-STEP2: if MM is 01, 03, 05,07,08,10 do STEP3 else STEP6 
-STEP3:if DD < 31 then do STEP4 else if DD=31 do STEP5 else 
-output(Invalid Date); 
-STEP4: tomorrowday=DD+1 goto STEP18 
-STEP5: tomorrowday=1; tomorrowmonth=month + 1 goto STEP18 
-STEP6: if MM is 04, 06, 09, 11 do STEP7 
-STEP7: if DD<30 then do STEP4 else if DD=30 do STEP5 else 
-output(Invalid Date); 
-STEP8: if MM is 12 
-STEP9: if DD<31 then STEP4 else STEP10 
-STEP10: tomorrowday=1, tommorowmonth=1, tommorowyear=YYYY+1; 
-goto STEP18 
-STEP11: if MM is 2 
-STEP12: if DD<28 do STEP4 else do STEP13 
-STEP13: if DD=28 & YYYY is a leap do STEP14 else STEP15 
-STEP14: tommorowday=29 goto STEP18 
-STEP15: tommorowday=1, tomorrowmonth=3, goto STEP18;
-
-
-STEP16: if DD=29 then do STEP15 else STEP17 
-STEP17: output(“Cannot have feb”, DD); STEP19 
-STEP18: output(tomorrowday, tomorrowmonth, tomorrowyear); 
-STEP19: exit
-#include<stdio.h> 
-#include<conio.h> 
-main( ) 
-{ 
-int month[12]={31,28,31,30,31,30,31,31,30,31,30,31}; 
-int d,m,y,nd,nm,ny,ndays; 
-clrscr( ); 
-printf("enter the date,month,year"); 
-scanf("%d%d%d",&d,&m,&y); 
-ndays=month[m-1]; 
-if(y<=1812 && y>2012) 
-{ 
-printf("Invalid Input Year"); 
-exit(0); 
-} 
-if(d<=0 || d>ndays) 
-{ 
-printf("Invalid Input Day"); 
-exit(0); 
-} 
-if(m<1 && m>12) 
-{ 
-printf("Invalid Input Month"); 
-exit(0); 
-} 
-if(m==2) 
-{ 
-if(y%100==0) 
-{ 
-if(y%400==0) 
-ndays=29; 
-} 
-else if(y%4==0) 
-ndays=29; 
-} 
-nd=d+1; 
-nm=m;
-ny=y; 
-if(nd>ndays) 
-{ 
-nd=1; 
-nm++; 
-} 
-if(nm>12) 
-{ 
-nm=1; 
-ny++; 
-} 
-printf("\n Given date is %d:%d:%d",d,m,y); 
-printf("\n Next day’s date is %d:%d:%d",nd,nm,ny); 
-getch( ); 
+switch (month)
+{
+    case 1:case 3:case 5:case 7:case 8:case 10:
+        if(day<31)
+            tomm_day=day+1;
+        else
+        {
+            tomm_day=1;
+            tomm_month=month+1;
+        }
+        break;
+    case 4:case 6:case 9:case 11:
+        if(day<30)
+            tomm_day=day+1;
+        else
+        {
+            tomm_day=1;
+            tomm_month=month+1;
+        }
+        break;
+    case 12:
+        if(day<31)
+            tomm_day=day+1;
+        else
+        {
+            tomm_day=1;
+            tomm_month=1;
+        if(year==2021)
+        {
+            printf("The next day is out of boundary value of year \n");
+            tomm_year=year+1;
+        }
+        else
+            tomm_year=year+1;
+        }
+    break;
+    case 2:
+        if(day<28)
+        tomm_day=day+1;
+        else if(isleap(year)&& day==28)
+            tomm_day=day+1;
+        else if(day==28 || day==29)
+        {
+            tomm_day=1;
+            tomm_month=3;
+        }
+        break;
+}
+printf("Next day is : %d/%d/%d",tomm_day,tomm_month,tomm_year);
+return 0;
 }
 
 
